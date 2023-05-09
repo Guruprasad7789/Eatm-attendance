@@ -2,7 +2,7 @@
 
   <!-- Login Page -->
   <div class="container"  *ngIf="screen === 'signin'">
-    <h1 class="heading">👋 Welcome<br><br></h1>
+    <h1 class="heading">👋 Welcome To EATM Attendace System<br><br></h1>
     <p class="para">Sign in to continue!</p>
     <form [formGroup]="formData">
       <ion-item lines="none" class="ion-item">
@@ -18,7 +18,7 @@
         </fieldset>
       </ion-item>
       <!-- <a (click)="change('forget')"><p class="forget-text"> Forgot Password?</p></a> -->
-      <p class="signup-text">I'm a new user&nbsp;<a (click)="change('signup')">Sign Up?</a></p>
+      <p class="signup-text mt-1">I'm a new user&nbsp;<a (click)="change('signup')">Sign Up?</a></p>
       <ion-button class="login-button" (click)="login()" expand="block">Login</ion-button>
     </form>
   </div>
@@ -52,7 +52,7 @@
           <ion-input formControlName="password" type="password" placeholder="*******"></ion-input>
         </fieldset>
       </ion-item>
-      <p class="signup-text">I'm already a member&nbsp;<a (click)="change('signin')">Sign In?</a></p>
+      <p class="signup-text mt-1">I'm already a member&nbsp;<a (click)="change('signin')">Sign In?</a></p>
       <ion-button class="login-button" (click)="register()" expand="block">Sign Up</ion-button>
     </form>
   </div>
@@ -67,7 +67,7 @@
         <ion-input type="email" placeholder="name@domain.com"></ion-input>
       </fieldset>
     </ion-item>
-    <p class="signup-text">Rememberd Password&nbsp;<a (click)="change('signin')">Sign In?</a></p>
+    <p class="signup-text mt-1">Rememberd Password&nbsp;<a (click)="change('signin')">Sign In?</a></p>
     <ion-button class="login-button" expand="block">Reset Password</ion-button>
   </div>
 

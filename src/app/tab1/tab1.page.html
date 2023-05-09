@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Dashboard
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,5 +13,26 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div class="container d-flex flex-column justify-content-between">
+    <div>
+      <h2>Today's Status</h2>
+      <ion-card class="my-4">
+        <div class="d-flex justify-content-between px-3 py-4">
+          <div class="d-flex flex-column">
+            <span class="fs-5">Morning</span>
+            <span class="fs-6 fw-bold">09:35 AM</span>
+          </div>
+          <div class="d-flex flex-column">
+            <span class="fs-5">Evening</span>
+            <span class="fs-6 fw-bold">08:20 PM</span>
+          </div>
+        </div>
+      </ion-card>
+    </div>
+    <div class="d-flex justify-content-center mb-5">
+      <ion-button>
+        Give attendance
+      </ion-button>
+    </div>
+  </div>
 </ion-content>

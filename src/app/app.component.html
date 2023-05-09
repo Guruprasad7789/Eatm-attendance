@@ -1,3 +1,6 @@
 <ion-app>
+  <ion-button *ngIf="auth.isLoggedIn()" class="log-out-btn" (click)="signOut()">
+    <ion-icon name="log-out-outline"></ion-icon>
+  </ion-button>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>

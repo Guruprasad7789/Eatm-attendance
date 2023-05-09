@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { UserModel } from '../models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth-component',
@@ -14,7 +15,7 @@ export class AuthComponentComponent implements OnInit {
   screen: any = 'signin';
   formData: FormGroup;
   isLoading = false;
-  constructor(private fb: FormBuilder, private auth: UserService) {
+  constructor(private fb: FormBuilder, private auth: UserService, private readonly router: Router) {
     this.formData = this.fb.group({
       name: ['',[Validators.required]],
       email: ['',[Validators.required]],
@@ -23,7 +24,11 @@ export class AuthComponentComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if(this.auth.isLoggedIn()) {
+      this.router.navigate(['home/tabs/tab1']).then();
+    }
+  }
 
   change(event){
     this.screen = event;

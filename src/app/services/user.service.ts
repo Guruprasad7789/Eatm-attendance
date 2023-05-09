@@ -21,7 +21,9 @@ export class UserService {
     public afAuth: AngularFireAuth,
     private router: Router,
     private alert: AlertController
-    ) {}
+    ) {
+
+    }
   // Create
   // createBooking(apt: UserModel) {
   //   return this.userListRef.push({
@@ -59,6 +61,7 @@ export class UserService {
   return this.afAuth
     .signInWithEmailAndPassword(email, password)
     .then((result) => {
+      localStorage.setItem('auth', JSON.stringify(result));
       this.afAuth.authState.subscribe((user) => {
         this.router.navigate(['home/tabs/tab1']).then();
       });
@@ -91,9 +94,15 @@ async showAlert(message: string) {
   const result = await alert.onDidDismiss();
 }
 
+
 isLoggedIn(): boolean {
-  const user = JSON.parse(localStorage.getItem('user') || '');
-  return user !== null && user.emailVerified !== false ? true : false;
+  let isLoggedIn = false;
+  const auth = localStorage.getItem('auth');
+  if(auth) {
+    const user = JSON.parse(auth);
+    isLoggedIn = user !== null;
+  }
+  return isLoggedIn;
 }
 
 setUserData(user: any, userToBeSaved: UserModel | null =null) {
@@ -115,10 +124,10 @@ setUserData(user: any, userToBeSaved: UserModel | null =null) {
 }
 
 // Sign out
-signOut() {
-  return this.afAuth.signOut().then(() => {
-    localStorage.removeItem('user');
-    this.router.navigate(['sign-in']);
+signOut(){
+  localStorage.removeItem('auth');
+  this.afAuth.signOut().then(() => {
+     this.router.navigate(['']);
   });
 }
 
