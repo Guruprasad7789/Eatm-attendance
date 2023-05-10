@@ -13,5 +13,48 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Coming soon"></app-explore-container>
+  <ion-content>
+    <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+      <ion-item lines="full">
+        <ion-label position="floating">Name</ion-label>
+        <ion-input formControlName="name" type="text" required></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">Student Id</ion-label>
+        <ion-input formControlName="studentId" type="text" required></ion-input>
+      </ion-item>
+      <ion-item  lines="none" >
+        <ion-label>Class</ion-label>
+        <ion-select placeholder="Select class"  formControlName="class">
+          <ion-select-option value="1">B Tech</ion-select-option>
+          <ion-select-option value="2">M Tech</ion-select-option>
+          <ion-select-option value="3">Diploma</ion-select-option>
+          <ion-select-option value="4">+2</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item  lines="none">
+        <ion-label>Year</ion-label>
+        <ion-select placeholder="Select Year"  formControlName="year">
+          <ion-select-option value="1">1st Year</ion-select-option>
+          <ion-select-option value="2">2nd Year</ion-select-option>
+          <ion-select-option value="3">3rd Year</ion-select-option>
+          <ion-select-option value="4">4th Year</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="email" type="email" required></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">DOB</ion-label>
+        <ion-datetime presentation="date" (ionChange)="getDate($event)"  [ngModelOptions]="
+        {standalone: true}" [(ngModel)]="dob"></ion-datetime>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-button class="my-4" type="submit" color="danger" expand="block">Submit</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-content>
 </ion-content>

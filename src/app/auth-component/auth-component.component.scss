@@ -1,17 +1,22 @@
+.eatm-logo{
+  height: 100px;
+  width: 100px;
+  margin: 70px auto 0;
+}
 .heading{
     font-size: 30px;
     font-weight: bold;
     padding-left: 20px;
-    margin-top: 70px;
+    margin-top: 10px;
     margin-bottom: -60px;
 }
 .para{
     font-size: 22px;
     font-weight: 500;
     padding-left: 20px;
-    margin-bottom: 70px;
+    margin-bottom: 15px;
     color: #A6ABB1;
-    margin-top: 35px;
+    margin-top: 45px;
 }
 .input-item{
     padding-left: 20px;
@@ -22,6 +27,10 @@
     ion-input{
         margin-top: -12px;
     }
+}
+
+.pb-more{
+  padding-bottom: 5rem;
 }
 legend {
   margin-bottom: 0;

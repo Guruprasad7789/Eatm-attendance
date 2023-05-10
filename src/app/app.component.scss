@@ -1,6 +1,21 @@
-.log-out-btn{
+.log-out-btn {
   position: absolute;
   z-index: 999999999;
   right: 12px;
   top: 6px;
+}
+
+.loader-container {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  background: aliceblue;
+  .loader {
+    position: absolute;
+    z-index: 9999999999999999;
+    top: calc(50% - 105px);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
 }

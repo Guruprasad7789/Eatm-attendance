@@ -1,12 +1,15 @@
 <ion-content [fullscreen]="true">
 
   <!-- Login Page -->
-  <div class="container"  *ngIf="screen === 'signin'">
-    <h1 class="heading">👋 Welcome To EATM Attendace System<br><br></h1>
+  <div class="container" *ngIf="screen === 'signin'">
+    <div class="w-100 d-flex">
+      <img src="assets/eatm.png" class="eatm-logo" alt="EATM logo">
+    </div>
+    <h1 class="heading">👋 Welcome To EATM Attendance System<br><br></h1>
     <p class="para">Sign in to continue!</p>
     <form [formGroup]="formData">
       <ion-item lines="none" class="ion-item">
-        <fieldset  class="input-item">
+        <fieldset class="input-item">
           <legend>Email Id</legend>
           <ion-input formControlName="email" type="email" placeholder="name@domain.com"></ion-input>
         </fieldset>
@@ -24,26 +27,51 @@
   </div>
 
   <!-- Sign up page -->
-  <div class="container"  *ngIf="screen === 'signup'">
-    <h1 class="heading">🚀 Create Account<br><br></h1>
+  <div class="container" *ngIf="screen === 'signup'">
+    <div class="w-100 d-flex">
+      <img src="assets/eatm.png" class="eatm-logo" alt="EATM logo">
+    </div>
+      <h1 class="heading">🚀 Create Account<br><br></h1>
     <p class="para">Sign up to get started!</p>
-    <form [formGroup]="formData">
+    <form [formGroup]="formData" class="pb-more">
       <ion-item lines="none" class="ion-item">
-        <fieldset  class="input-item">
+        <fieldset class="input-item">
           <legend>Full Name</legend>
           <ion-input formControlName="name" type="text" placeholder="Guru prasad"></ion-input>
         </fieldset>
       </ion-item>
       <ion-item lines="none" class="ion-item">
-        <fieldset  class="input-item">
-          <legend>Email Id</legend>
-          <ion-input formControlName="email" type="email" placeholder="name@domain.com"></ion-input>
+        <fieldset class="input-item">
+          <legend>Student Id</legend>
+          <ion-input formControlName="studentId" type="text" placeholder="1601322041"></ion-input>
         </fieldset>
       </ion-item>
       <ion-item lines="none" class="ion-item">
-        <fieldset  class="input-item">
-          <legend>Student Id</legend>
-          <ion-input formControlName="studentId" type="text" placeholder="1601322041"></ion-input>
+        <ion-label>Class</ion-label>
+        <ion-select placeholder="Select class" formControlName="class">
+          <ion-select-option value="1">B Tech</ion-select-option>
+          <ion-select-option value="2">M Tech</ion-select-option>
+          <ion-select-option value="3">Diploma</ion-select-option>
+          <ion-select-option value="4">+2</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="none" class="ion-item">
+        <ion-label>Year</ion-label>
+        <ion-select placeholder="Select Year" formControlName="year">
+          <ion-select-option value="1">1st Year</ion-select-option>
+          <ion-select-option value="2">2nd Year</ion-select-option>
+          <ion-select-option value="3">3rd Year</ion-select-option>
+          <ion-select-option value="4">4th Year</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">DOB</ion-label>
+        <ion-datetime presentation="date" formControlName="dob"></ion-datetime>
+      </ion-item>
+      <ion-item lines="none" class="ion-item">
+        <fieldset class="input-item">
+          <legend>Email Id</legend>
+          <ion-input formControlName="email" type="email" placeholder="name@domain.com"></ion-input>
         </fieldset>
       </ion-item>
       <ion-item lines="none" class="ion-item">
@@ -58,11 +86,11 @@
   </div>
 
   <!-- Forget password page -->
-  <div class="container"  *ngIf="screen === 'forget'">
+  <div class="container" *ngIf="screen === 'forget'">
     <h1 class="heading">Forget Password?<br><br></h1>
     <p class="para">Enter email to reset</p>
     <ion-item lines="none" class="ion-item">
-      <fieldset  class="input-item">
+      <fieldset class="input-item">
         <legend>Email Id</legend>
         <ion-input type="email" placeholder="name@domain.com"></ion-input>
       </fieldset>

@@ -1,9 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
-import { UserModel } from '../models/user.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,7 +16,10 @@ export class AuthComponentComponent implements OnInit {
     this.formData = this.fb.group({
       name: ['',[Validators.required]],
       email: ['',[Validators.required]],
+      dob: ['',[Validators.required]],
       studentId: ['',[Validators.required]],
+      class: ['',[Validators.required]],
+      year: ['',[Validators.required]],
       password: ['',[Validators.required]],
     });
   }
@@ -49,6 +49,7 @@ export class AuthComponentComponent implements OnInit {
       this.isLoading = true;
       formData.append('name', this.formData.get('name').value);
       formData.append('email', this.formData.get('email').value);
+      formData.append('dob', new Date().toISOString());
       formData.append('studentId', this.formData.get('studentId').value);
       formData.append('password', this.formData.get('password').value);
       this.auth.signUp(this.formData.value).then((data: any)=>{

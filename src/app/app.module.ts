@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +17,9 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AuthGuardService } from './guards/auth.guard';
+import { AttendanceService } from './services/attendance.service';
+import { AppService } from './services/app.service';
+import { AppInterceptor } from './interceptors/app.interceptor';
 
 @NgModule({
   declarations: [AppComponent,AuthComponentComponent],
@@ -26,8 +29,10 @@ import { AuthGuardService } from './guards/auth.guard';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [CommonModule,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AuthGuardService],
+  providers: [CommonModule,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AuthGuardService, AttendanceService, AppService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
