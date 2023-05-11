@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
-  appName: 'juned',
+  appName: 'EATM Attendance',
   webDir: 'www',
   bundledWebRuntime: false
 };

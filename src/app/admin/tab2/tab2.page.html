@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Attendace History
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Attendace History</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card *ngFor="let attendance of attendances">
+    <ion-card-header class="d-flex justify-content-between">
+      <ion-card-title>Date: {{attendance.dateStamp}}</ion-card-title>
+      <ion-icon class="mark-icon" [ngStyle]="{background: getIcon(attendance).color}" [name]="getIcon(attendance).name"></ion-icon>
+    </ion-card-header>
+
+    <ion-card-content class="d-flex justify-content-between flex-wrap">
+      <ion-card-subtitle>Morning: {{attendance.morning.length > 0 ? attendance.morning : '--/--'}}</ion-card-subtitle>
+      <ion-card-subtitle>Evening: {{attendance.evening.length > 0 ? attendance.evening : '--/--'}}</ion-card-subtitle>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,8 +1,9 @@
 <ion-content [fullscreen]="true">
 
   <!-- Login Page -->
-  <div class="container" *ngIf="screen === 'signin'">
-    <div class="w-100 d-flex">
+  <div  *ngIf="screen === 'signin'">
+    <div class="w-100 d-flex justify-content-between">
+      <img src="assets/login.gif" class="person-img" alt="Person logging in">
       <img src="assets/eatm.png" class="eatm-logo" alt="EATM logo">
     </div>
     <h1 class="heading">👋 Welcome To EATM Attendance System<br><br></h1>
@@ -27,8 +28,9 @@
   </div>
 
   <!-- Sign up page -->
-  <div class="container" *ngIf="screen === 'signup'">
-    <div class="w-100 d-flex">
+  <div  *ngIf="screen === 'signup'">
+    <div class="w-100 d-flex justify-content-between">
+      <img src="assets/login.gif" class="person-img" alt="Person logging in">
       <img src="assets/eatm.png" class="eatm-logo" alt="EATM logo">
     </div>
       <h1 class="heading">🚀 Create Account<br><br></h1>
@@ -37,13 +39,13 @@
       <ion-item lines="none" class="ion-item">
         <fieldset class="input-item">
           <legend>Full Name</legend>
-          <ion-input formControlName="name" type="text" placeholder="Guru prasad"></ion-input>
+          <ion-input formControlName="name" type="text" placeholder="Your Full Name"></ion-input>
         </fieldset>
       </ion-item>
       <ion-item lines="none" class="ion-item">
         <fieldset class="input-item">
           <legend>Student Id</legend>
-          <ion-input formControlName="studentId" type="text" placeholder="1601322041"></ion-input>
+          <ion-input formControlName="studentId" type="text" placeholder="Your Student Id"></ion-input>
         </fieldset>
       </ion-item>
       <ion-item lines="none" class="ion-item">
@@ -86,7 +88,7 @@
   </div>
 
   <!-- Forget password page -->
-  <div class="container" *ngIf="screen === 'forget'">
+  <div  *ngIf="screen === 'forget'">
     <h1 class="heading">Forget Password?<br><br></h1>
     <p class="para">Enter email to reset</p>
     <ion-item lines="none" class="ion-item">

@@ -1,14 +1,15 @@
-import { Component, OnInit} from '@angular/core';
+import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { UserModel, UserRole } from '../models/user.model';
 
 @Component({
   selector: 'app-auth-component',
   templateUrl: './auth-component.component.html',
   styleUrls: ['./auth-component.component.scss'],
 })
-export class AuthComponentComponent implements OnInit {
+export class AuthComponentComponent  {
   screen: any = 'signin';
   formData: FormGroup;
   isLoading = false;
@@ -24,11 +25,6 @@ export class AuthComponentComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    if(this.auth.isLoggedIn()) {
-      this.router.navigate(['home/tabs/tab1']).then();
-    }
-  }
 
   change(event){
     this.screen = event;
@@ -44,15 +40,11 @@ export class AuthComponentComponent implements OnInit {
   }
 
   register(){
-    const formData: any = new FormData();
     if(this.formData.valid){
       this.isLoading = true;
-      formData.append('name', this.formData.get('name').value);
-      formData.append('email', this.formData.get('email').value);
-      formData.append('dob', new Date().toISOString());
-      formData.append('studentId', this.formData.get('studentId').value);
-      formData.append('password', this.formData.get('password').value);
-      this.auth.signUp(this.formData.value).then((data: any)=>{
+      const payload = this.formData.value as UserModel;
+      payload.role = UserRole.user;
+      this.auth.signUp(payload).then((data: any)=>{
         this.screen = 'signin';
       });
     }

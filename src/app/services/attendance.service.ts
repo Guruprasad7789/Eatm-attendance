@@ -47,7 +47,8 @@ return err;
 getTodayAttendance() {
   this.app.changeLoader(true);
   return this.afs.collection('attendance-collection', ref =>
-  ref.where('dateStamp', '==', moment().format('YYYY-MM-DD'))).snapshotChanges().pipe(map(data => {
+  ref.where('dateStamp', '==', moment().format('YYYY-MM-DD'))
+  .where('userId', '==', this.user.getCurrentUser().uid)).snapshotChanges().pipe(map(data => {
       this.app.changeLoader(false);
       return data;
   }),catchError(err => {

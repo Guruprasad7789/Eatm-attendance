@@ -15,9 +15,9 @@ export class AppComponent {
     public readonly app: AppService,
   ) {
     this.auth.getUpdateDetails().subscribe((res: any) => {
-      if(res.length > 0 && res.isMassUpdate) {
+      if(res.length > 0 && res[0].isMassUpdate) {
         this.updateAvailable = true;
-        this.app.showAlert('Update available. Please update.').then();
+        this.app.showAlert('Update available. Please update the app from store.').then();
       }
     });
 

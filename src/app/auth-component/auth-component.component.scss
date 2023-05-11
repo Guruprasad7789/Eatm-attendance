@@ -1,13 +1,20 @@
 .eatm-logo{
   height: 100px;
   width: 100px;
-  margin: 70px auto 0;
+  margin: 15px 15px 0 0;
 }
+.person-img {
+  height: 250px;
+  max-width: 70%;
+  border-radius: 50%;
+  margin: 15px 15px 20px;
+}
+
 .heading{
     font-size: 30px;
     font-weight: bold;
     padding-left: 20px;
-    margin-top: 10px;
+    margin-top: -10px;
     margin-bottom: -60px;
 }
 .para{
@@ -30,7 +37,7 @@
 }
 
 .pb-more{
-  padding-bottom: 5rem;
+  padding-bottom: 1.5rem;
 }
 legend {
   margin-bottom: 0;

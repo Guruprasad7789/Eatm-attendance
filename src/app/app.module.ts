@@ -20,6 +20,7 @@ import { AuthGuardService } from './guards/auth.guard';
 import { AttendanceService } from './services/attendance.service';
 import { AppService } from './services/app.service';
 import { AppInterceptor } from './interceptors/app.interceptor';
+import { AuthLoggedGuardService } from './guards/auth-logged.guard';
 
 @NgModule({
   declarations: [AppComponent,AuthComponentComponent],
@@ -32,7 +33,8 @@ import { AppInterceptor } from './interceptors/app.interceptor';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [CommonModule,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AuthGuardService, AttendanceService, AppService],
+  providers: [CommonModule,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AuthGuardService, AuthLoggedGuardService, AttendanceService, AppService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

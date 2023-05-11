@@ -28,7 +28,6 @@ export class Tab1Page {
     private readonly http: HttpClient,
     private readonly user: UserService
   ) {
-this.http.get('https://jsonplaceholder.typicode.com/todos/1').subscribe()
     this.attendance.getTodayAttendance().subscribe((res: any) => {
       if (res && res.length > 0) {
         const data = res.map((item: any) => ({
@@ -81,8 +80,10 @@ this.http.get('https://jsonplaceholder.typicode.com/todos/1').subscribe()
           id: this.todayAttendance.id,
           userId: user.uid,
           dateStamp: moment().format('YYYY-MM-DD'),
-          morning:  this.currentTime === TimeEnum.morning ? moment().format('hh:mm a') : '',
-          evening: this.currentTime === TimeEnum.evening ? moment().format('hh:mm a') : ''
+          morning:  this.todayAttendance.morning.length > 0 ? this.todayAttendance.morning :
+          (this.currentTime === TimeEnum.morning ? moment().format('hh:mm a') : ''),
+          evening: this.todayAttendance.evening.length > 0 ? this.todayAttendance.evening :
+          (this.currentTime === TimeEnum.evening ? moment().format('hh:mm a') : '')
         }).then();
       }
     }

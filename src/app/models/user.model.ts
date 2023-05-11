@@ -7,6 +7,7 @@ export interface UserModel {
   year: string;
   studentId: string;
   password: string;
+  role: UserRole;
 }
 export interface FirebaseUser {
   apiKey: string;
@@ -17,4 +18,8 @@ export interface FirebaseUser {
   isAnonymous: string;
   lastLoginAt: string;
   uid: string;
+}
+
+export enum UserRole {
+  user = 1, admin
 }

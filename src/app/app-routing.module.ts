@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthComponentComponent } from './auth-component/auth-component.component';
 import { AuthGuardService } from './guards/auth.guard';
+import { AuthLoggedGuardService } from './guards/auth-logged.guard';
 
 const routes: Routes = [
   {
@@ -12,7 +13,8 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: AuthComponentComponent
+    component: AuthComponentComponent,
+    canActivate: [AuthLoggedGuardService]
   },
 
   { path: '**', redirectTo: '' }

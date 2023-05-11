@@ -13,24 +13,27 @@ export class Tab3Page {
   dob = '1998-01-01';
   fUser: FirebaseUser;
   constructor(public formBuilder: FormBuilder,
-    private readonly auth: UserService) {    this.ionicForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      dob: ['', [Validators.required]],
-      class: ['', [Validators.required]],
-      year: ['', [Validators.required]],
-      studentId: ['', [Validators.required]]
-    });}
-    ionViewDidEnter(): void {
+    private readonly auth: UserService) {
+      this.ionicForm = this.formBuilder.group({
+        name: ['', [Validators.required, Validators.minLength(2)]],
+        email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+        dob: ['', [Validators.required]],
+        class: ['', [Validators.required]],
+        year: ['', [Validators.required]],
+        studentId: ['', [Validators.required]]
+      });
+  }
+  ionViewDidEnter(): void {
     this.fUser = this.auth.getCurrentUser();
-      this.auth.getUser(this.fUser.uid).subscribe((res: any) => {
-        if(!!res){
-          this.ionicForm.patchValue({email: res.email, name: res.name,
-            studentId: res.studentId, dob: (res.dob.length > 10 ? res.dob.substring(0, 10) : res.dob), class: res.class, year: res.year });
-            this.dob = (res.dob.length > 10 ? res.dob.substring(0, 10) : res.dob);
-        }
-    });
-
+    const res = this.auth.getUser();
+    console.log(res);
+    if (!!res) {
+      this.ionicForm.patchValue({
+        email: res.email, name: res.name,
+        studentId: res.studentId, dob: (res.dob.length > 10 ? res.dob.substring(0, 10) : res.dob), class: res.class, year: res.year
+      });
+      this.dob = (res.dob.length > 10 ? res.dob.substring(0, 10) : res.dob);
+    }
   }
   getDate(e) {
     const date = new Date(e.target.value).toISOString().substring(0, 10);

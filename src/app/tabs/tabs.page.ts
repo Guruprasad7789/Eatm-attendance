@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UserService } from '../services/user.service';
+import { UserRole } from '../models/user.model';
 
 @Component({
   selector: 'app-tabs',
@@ -6,7 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage {
-
-  constructor() {}
+  readonly userRole = UserRole;
+  constructor(public user: UserService) {}
 
 }
