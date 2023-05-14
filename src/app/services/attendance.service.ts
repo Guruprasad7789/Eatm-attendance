@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { UserService } from './user.service';
 import { AppService } from './app.service';
 import { catchError, map } from 'rxjs/operators';
+import { UserModel } from '../models/user.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -63,6 +64,18 @@ getCurrentUserAttendances() {
   ref.where('userId', '==', this.user.getCurrentUser().uid)).valueChanges().pipe(map(data => {
     this.app.changeLoader(false);
     return data;
+}),catchError(err => {
+  this.app.changeLoader(false);
+  this.app.showAlert(err.message);
+  return err;
+}));
+}
+getStudentAttendancesPerDate(date: string) {
+  this.app.changeLoader(true);
+  return this.afs.collection('attendance-collection', ref =>
+  ref.where('dateStamp', '==', date)).valueChanges().pipe(map((data: any) => {
+    this.app.changeLoader(false);
+      return data;
 }),catchError(err => {
   this.app.changeLoader(false);
   this.app.showAlert(err.message);

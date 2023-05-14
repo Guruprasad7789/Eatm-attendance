@@ -21,4 +21,4 @@ import { ExploreContainerComponentModule } from 'src/app/explore-container/explo
   ],
   declarations: [AdminTab3Page]
 })
-export class Tab3PageModule {}
+export class AdminTab3PageModule {}

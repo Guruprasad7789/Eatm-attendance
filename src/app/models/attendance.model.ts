@@ -5,4 +5,6 @@ export interface AttendanceModel {
   dateStamp: string;
   morning: string;
   evening: string;
+  studentId: string;
+  class: string;
 }

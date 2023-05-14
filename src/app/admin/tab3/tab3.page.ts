@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FirebaseUser } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 @Component({
-  selector: 'app-tab3',
+  selector: 'app-admin-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
@@ -24,7 +24,6 @@ export class AdminTab3Page {
       });
   }
   ionViewDidEnter(): void {
-    alert('admin')
     this.fUser = this.auth.getCurrentUser();
     const res = this.auth.getUser();
     console.log(res);
@@ -56,7 +55,7 @@ export class AdminTab3Page {
       const user = {
         ...this.ionicForm.value,
         uid: this.fUser.uid
-      }
+      };
       this.auth.updateUser(user).then();
     }
   }

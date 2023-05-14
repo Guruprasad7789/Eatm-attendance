@@ -12,7 +12,7 @@ interface HourDetail {
   time: string;
 }
 @Component({
-  selector: 'app-tab1',
+  selector: 'app-admin-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
@@ -65,14 +65,16 @@ export class AdminTab1Page {
   };
   logTodayAttendance() {
     if (this.currentTime !== TimeEnum.none) {
-      const user = this.user.getCurrentUser();
+      const user = this.user.getUser();
       if (!this.todayAttendance) {
         this.attendance.addUserAttendanceData({
           aid: Date.now().toString(),
           userId: user.uid,
           dateStamp: moment().format('YYYY-MM-DD'),
           morning:  this.currentTime === TimeEnum.morning ? moment().format('hh:mm a') : '',
-          evening: this.currentTime === TimeEnum.evening ? moment().format('hh:mm a') : ''
+          evening: this.currentTime === TimeEnum.evening ? moment().format('hh:mm a') : '',
+          studentId: user.studentId,
+          class: user.studentId
         }).then(res => console.log(res));
       } else {
         this.attendance.updateUserAttendanceData({
@@ -83,7 +85,9 @@ export class AdminTab1Page {
           morning:  this.todayAttendance.morning.length > 0 ? this.todayAttendance.morning :
           (this.currentTime === TimeEnum.morning ? moment().format('hh:mm a') : ''),
           evening: this.todayAttendance.evening.length > 0 ? this.todayAttendance.evening :
-          (this.currentTime === TimeEnum.evening ? moment().format('hh:mm a') : '')
+          (this.currentTime === TimeEnum.evening ? moment().format('hh:mm a') : ''),
+          studentId: user.studentId,
+          class: user.class
         }).then();
       }
     }

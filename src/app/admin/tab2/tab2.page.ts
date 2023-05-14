@@ -3,7 +3,7 @@ import { AttendanceModel } from 'src/app/models/attendance.model';
 import { AttendanceService } from 'src/app/services/attendance.service';
 
 @Component({
-  selector: 'app-tab2',
+  selector: 'app-admin-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
@@ -13,7 +13,7 @@ export class AdminTab2Page {
   constructor(
     private readonly attendance: AttendanceService
   ) {
-    this.attendance.getCurrentUserAttendances().subscribe((res: any) => {
+    this.attendance.getStudentAttendancesPerDate('2023-05-08').subscribe((res: any) => {
       console.log(res);
       if(res && res.length > 0) {
         this.attendances = res;
@@ -28,5 +28,5 @@ export class AdminTab2Page {
       returnData = {name: 'close-outline', color: 'red'};
     }
     return returnData;
-  }
+  };
 }
