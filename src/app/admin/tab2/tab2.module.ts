@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminTab2Page } from './tab2.page';
 
-import { ExploreContainerComponentModule } from 'src/app/explore-container/explore-container.module';
 import { AdminTab2PageRoutingModule } from './tab2-routing.module';
 
 @NgModule({
@@ -13,7 +12,6 @@ import { AdminTab2PageRoutingModule } from './tab2-routing.module';
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
     AdminTab2PageRoutingModule
   ],
   declarations: [AdminTab2Page]

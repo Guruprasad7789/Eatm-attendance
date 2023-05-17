@@ -21,18 +21,27 @@ import { AttendanceService } from './services/attendance.service';
 import { AppService } from './services/app.service';
 import { AppInterceptor } from './interceptors/app.interceptor';
 import { AuthLoggedGuardService } from './guards/auth-logged.guard';
+import { Geolocation } from '@capacitor/geolocation';
 
 @NgModule({
   declarations: [AppComponent,AuthComponentComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ReactiveFormsModule, HttpClientModule,
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
+
   ],
+
   providers: [CommonModule,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthGuardService, AuthLoggedGuardService, AttendanceService, AppService],
   bootstrap: [AppComponent],

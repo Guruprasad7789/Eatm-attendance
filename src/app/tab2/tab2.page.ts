@@ -14,7 +14,6 @@ export class Tab2Page {
     private readonly attendance: AttendanceService
   ) {
     this.attendance.getCurrentUserAttendances().subscribe((res: any) => {
-      console.log(res);
       if(res && res.length > 0) {
         this.attendances = res;
       }
@@ -28,5 +27,5 @@ export class Tab2Page {
       returnData = {name: 'close-outline', color: 'red'};
     }
     return returnData;
-  }
+  };
 }

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { UserService } from './services/user.service';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable } from 'rxjs';
 import { AppService } from './services/app.service';
 @Component({
   selector: 'app-root',
@@ -10,20 +8,30 @@ import { AppService } from './services/app.service';
 })
 export class AppComponent {
   updateAvailable = false;
+
+
+
   constructor(
     public readonly auth: UserService,
     public readonly app: AppService,
+
   ) {
+
+
     this.auth.getUpdateDetails().subscribe((res: any) => {
-      if(res.length > 0 && res[0].isMassUpdate) {
+      if (res.length > 0 && res[0].isMassUpdate) {
         this.updateAvailable = true;
         this.app.showAlert('Update available. Please update the app from store.').then();
       }
     });
 
   }
-   signOut() {
+  signOut() {
     this.auth.signOut();
-  }
+  };
+
+
 
 }
+
+

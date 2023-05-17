@@ -40,10 +40,10 @@ export class UserService {
         this.getUserInitially(result.user.uid).subscribe((res: any) => {
           if (res) {
             localStorage.setItem('UserInfo', JSON.stringify(res));
+            this.afAuth.authState.subscribe((_user) => {
+              this.router.navigate(['home/tabs/'+ (res.role === UserRole.admin ? 'admin/' : '') +'tab1']).then();
+            });
           }
-        });
-        this.afAuth.authState.subscribe((_user) => {
-          this.router.navigate(['home/tabs/tab1']).then();
         });
       })
       .catch((error) => {
@@ -113,12 +113,18 @@ export class UserService {
   }
 
   // Sign out
-  signOut() {
+  signOut(location = false) {
     localStorage.clear();
     this.app.changeLoader(true);
     this.afAuth.signOut().then(() => {
       this.app.changeLoader(false);
-      this.router.navigate(['']);
+      if (location) {
+        this.app.showAlert('You should be present in college to access this app').then(() => {
+          this.router.navigate(['']);
+        });
+      } else {
+        this.router.navigate(['']);
+      }
     });
   }
 

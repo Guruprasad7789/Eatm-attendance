@@ -13,15 +13,47 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-card *ngFor="let attendance of attendances">
-    <ion-card-header class="d-flex justify-content-between">
-      <ion-card-title>Date: {{attendance.dateStamp}}</ion-card-title>
-      <ion-icon class="mark-icon" [ngStyle]="{background: getIcon(attendance).color}" [name]="getIcon(attendance).name"></ion-icon>
-    </ion-card-header>
+  <div class="date-container d-flex justify-content-center position-relative flex-column ml-20">
+    <label class="default-color fs-5 fw-bold" for="date">Select date</label>
+    <input type="date" [(ngModel)]="selectedDate" placeholder="Select date">
+  </div>
+  <div class="d-flex justify-content-evenly px-2">
+    <ion-item lines="none">
+      <ion-select placeholder="Select class" [(ngModel)]="selectedClass">
+        <ion-select-option value="1">B Tech</ion-select-option>
+        <ion-select-option value="2">M Tech</ion-select-option>
+        <ion-select-option value="3">Diploma</ion-select-option>
+        <ion-select-option value="4">+2</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-select placeholder="Select Year" [(ngModel)]="selectedYear">
+        <ion-select-option value="1">1st Year</ion-select-option>
+        <ion-select-option value="2">2nd Year</ion-select-option>
+        <ion-select-option value="3">3rd Year</ion-select-option>
+        <ion-select-option value="4">4th Year</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+  <div class="d-flex justify-content-evenly my-2">
+      <ion-button (click)="findAttendance()">Search</ion-button>
+      <ion-button (click)="findAttendance(true)">Search All</ion-button>
+  </div>
+  <ng-container *ngIf="attendances.length > 0; else noRecordFound">
+    <ion-card *ngFor="let attendance of attendances">
+      <ion-card-header class="d-flex justify-content-between">
+        <ion-card-title>Date: {{attendance.dateStamp}}</ion-card-title>
+        <ion-icon class="mark-icon" [ngStyle]="{background: getIcon(attendance).color}"
+          [name]="getIcon(attendance).name"></ion-icon>
+      </ion-card-header>
 
-    <ion-card-content class="d-flex justify-content-between flex-wrap">
-      <ion-card-subtitle>Morning: {{attendance.morning.length > 0 ? attendance.morning : '--/--'}}</ion-card-subtitle>
-      <ion-card-subtitle>Evening: {{attendance.evening.length > 0 ? attendance.evening : '--/--'}}</ion-card-subtitle>
-    </ion-card-content>
-  </ion-card>
+      <ion-card-content class="d-flex justify-content-between flex-wrap">
+        <ion-card-subtitle>Morning: {{attendance.morning.length > 0 ? attendance.morning : '--/--'}}</ion-card-subtitle>
+        <ion-card-subtitle>Evening: {{attendance.evening.length > 0 ? attendance.evening : '--/--'}}</ion-card-subtitle>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+  <ng-template #noRecordFound>
+    <ion-card class="p-2 d-flex justify-content-center">No record found.</ion-card>
+  </ng-template>
 </ion-content>

@@ -31,7 +31,7 @@
     </div>
     <div class="d-flex justify-content-center mb-5">
       <ng-container *ngIf="!loggedBoth ; else logged">
-        <ion-button *ngIf="currentTime !== timeEnum.none; else cantGive" (click)="logTodayAttendance()">
+        <ion-button *ngIf="currentTime !== timeEnum.none; else cantGive" (click)="checkForLocation()">
           Give attendance
         </ion-button>
         <ng-template #cantGive>

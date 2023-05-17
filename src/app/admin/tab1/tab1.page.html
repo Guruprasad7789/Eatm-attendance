@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Dashboard
+      Student Today's Attendace
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,42 +9,47 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Dashboard</ion-title>
+      <ion-title size="large">Student Today's Attendace</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div class="container d-flex flex-column justify-content-between">
-    <div>
-      <h2 class="default-color mt-4">Today's Status</h2>
-      <ion-card class="my-3">
-        <div class="d-flex justify-content-between px-3 py-4" >
-          <div class="d-flex flex-column">
-            <span class="fs-5">Morning</span>
-            <span class="fs-6 fw-bold">{{!!todayAttendance && todayAttendance.morning.length > 0 ? todayAttendance.morning : '--/--'}}</span>
-          </div>
-          <div class="d-flex flex-column">
-            <span class="fs-5">Evening</span>
-            <span class="fs-6 fw-bold">{{!!todayAttendance &&todayAttendance.evening.length > 0 ? todayAttendance.evening : '--/--'}}</span>
-          </div>
-        </div>
-      </ion-card>
-    </div>
-    <div class="d-flex justify-content-center mb-5">
-      <ng-container *ngIf="!loggedBoth ; else logged">
-        <ion-button *ngIf="currentTime !== timeEnum.none; else cantGive" (click)="logTodayAttendance()">
-          Give attendance
-        </ion-button>
-        <ng-template #cantGive>
-          <span class="fs-6 default-color" *ngIf="hourDetails.length >= 2">Attendance can be given between
-            <b>{{hourDetails[1].time}} {{hourDetails[1].startTime}}</b> to <b>{{hourDetails[1].endTime}}</b>
-            and <b>{{hourDetails[0].time}} {{hourDetails[0].startTime - 12}}</b> to <b>{{hourDetails[0].endTime -
-              12}}</b>
-          </span>
-        </ng-template>
-      </ng-container>
-      <ng-template #logged>
-        <span class="fs-6 default-color">You have loogged your attendance for the day. Kindly log back tomorrow. Thanks.</span>
-      </ng-template>
-    </div>
+  <div class="d-flex justify-content-evenly mt-4 px-2">
+    <ion-item lines="none">
+      <ion-select placeholder="Select class" [(ngModel)]="selectedClass">
+        <ion-select-option value="1">B Tech</ion-select-option>
+        <ion-select-option value="2">M Tech</ion-select-option>
+        <ion-select-option value="3">Diploma</ion-select-option>
+        <ion-select-option value="4">+2</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-select placeholder="Select Year" [(ngModel)]="selectedYear">
+        <ion-select-option value="1">1st Year</ion-select-option>
+        <ion-select-option value="2">2nd Year</ion-select-option>
+        <ion-select-option value="3">3rd Year</ion-select-option>
+        <ion-select-option value="4">4th Year</ion-select-option>
+      </ion-select>
+    </ion-item>
   </div>
+  <div class="d-flex justify-content-evenly my-2">
+    <ion-button (click)="findAttendance()">Search</ion-button>
+    <ion-button (click)="findAttendance(true)">Search All</ion-button>
+  </div>
+  <ng-container *ngIf="attendances.length > 0; else noRecordFound">
+    <ion-card *ngFor="let attendance of attendances">
+      <ion-card-header class="d-flex justify-content-between">
+        <ion-card-title>Date: {{attendance.dateStamp}}</ion-card-title>
+        <ion-icon class="mark-icon" [ngStyle]="{background: getIcon(attendance).color}"
+          [name]="getIcon(attendance).name"></ion-icon>
+      </ion-card-header>
+
+      <ion-card-content class="d-flex justify-content-between flex-wrap">
+        <ion-card-subtitle>Morning: {{attendance.morning.length > 0 ? attendance.morning : '--/--'}}</ion-card-subtitle>
+        <ion-card-subtitle>Evening: {{attendance.evening.length > 0 ? attendance.evening : '--/--'}}</ion-card-subtitle>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+  <ng-template #noRecordFound>
+    <ion-card class="p-2 d-flex justify-content-center">No record found.</ion-card>
+  </ng-template>
 </ion-content>

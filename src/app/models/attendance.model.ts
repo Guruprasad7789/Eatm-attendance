@@ -7,4 +7,5 @@ export interface AttendanceModel {
   evening: string;
   studentId: string;
   class: string;
+  year: string;
 }
