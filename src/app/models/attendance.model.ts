@@ -8,4 +8,6 @@ export interface AttendanceModel {
   studentId: string;
   class: string;
   year: string;
+  name: string;
+  email: string;
 }

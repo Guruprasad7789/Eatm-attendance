@@ -35,18 +35,32 @@
       </ion-select>
     </ion-item>
   </div>
+  <ion-item class="p-3 ">
+    <ion-input [(ngModel)]="regdNo" placeholder="Registration no (Optional)"></ion-input>
+  </ion-item>
   <div class="d-flex justify-content-evenly my-2">
-      <ion-button (click)="findAttendance()">Search</ion-button>
-      <ion-button (click)="findAttendance(true)">Search All</ion-button>
+    <ion-button (click)="findAttendance()">Search</ion-button>
+    <ion-button (click)="findAttendance(true)">Search All</ion-button>
   </div>
+
   <ng-container *ngIf="attendances.length > 0; else noRecordFound">
+    <ion-card class="p-2 info-card">
+      <p class="mb-0 fw-bold d-flex justify-content-between">
+        <span>Total attendance: {{attendances.length}}</span> &nbsp;&nbsp; <span>Full attendance: {{fullAttend}}</span>
+      </p>
+      <p class="mb-0 fw-bold">Only morning attendance: {{morningAttend}}</p>
+      <p class="mb-0 fw-bold">Only evening attendance: {{eveningAttend}}</p>
+    </ion-card>
     <ion-card *ngFor="let attendance of attendances">
-      <ion-card-header class="d-flex justify-content-between">
+      <ion-card-header class="d-flex justify-content-between px-2 pb-0">
         <ion-card-title>Date: {{attendance.dateStamp}}</ion-card-title>
         <ion-icon class="mark-icon" [ngStyle]="{background: getIcon(attendance).color}"
           [name]="getIcon(attendance).name"></ion-icon>
       </ion-card-header>
-
+      <ion-card-content class="d-flex justify-content-between flex-wrap pb-0">
+        <ion-card-subtitle class="w-100">Name: {{attendance.name}}</ion-card-subtitle>
+        <ion-card-subtitle class="w-100">Registration number: {{attendance.studentId}}</ion-card-subtitle>
+      </ion-card-content>
       <ion-card-content class="d-flex justify-content-between flex-wrap">
         <ion-card-subtitle>Morning: {{attendance.morning.length > 0 ? attendance.morning : '--/--'}}</ion-card-subtitle>
         <ion-card-subtitle>Evening: {{attendance.evening.length > 0 ? attendance.evening : '--/--'}}</ion-card-subtitle>

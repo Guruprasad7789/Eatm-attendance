@@ -27,6 +27,7 @@ export class Tab1Page implements OnInit {
   timeEnum = TimeEnum;
   loggedBoth = false;
   locationDistance = 0;
+  buttonClicked = false;
 
   constructor(
     private readonly attendance: AttendanceService,
@@ -88,8 +89,13 @@ export class Tab1Page implements OnInit {
           evening: this.currentTime === TimeEnum.evening ? moment().format('hh:mm a') : '',
           studentId: user.studentId,
           year: user.year,
-          class: user.class
-        }).then(res => console.log(res));
+          class: user.class,
+          name: user.name,
+          email: user.email,
+        }).then(res => {
+          console.log(res);
+          this.app.changeLoader(false);
+        });
       } else {
         this.attendance.updateUserAttendanceData({
           aid: Date.now().toString(),
@@ -102,41 +108,48 @@ export class Tab1Page implements OnInit {
             (this.currentTime === TimeEnum.evening ? moment().format('hh:mm a') : ''),
           studentId: user.studentId,
           year: user.year,
-          class: user.class
-        }).then();
+          class: user.class,
+          name: user.name,
+          email: user.email,
+        }).then(() => {
+          this.app.changeLoader(false);
+        }).catch(err => {
+          this.app.changeLoader(false);
+        });
       }
     }
 
   };
 
   checkForLocation() {
-    this.auth.getUpdateDetails().subscribe((res: any) => {
-      if (res.length > 0) {
-        this.locationDistance = res[0].distanceCordinate;
-        console.log('locaiton finding ');
-        Geolocation.checkPermissions().then(permission => {
-          if (permission.location === 'granted') {
-            Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then(loc => {
-              this.getDistanceFromLatLonInKm(loc.coords.latitude, loc.coords.longitude, res[0].collegeLat, res[0].collegeLong);
-            });
+    if (!this.buttonClicked) {
+      this.buttonClicked = true;
+      this.app.changeLoader(true);
+      const storageLocationData = localStorage.getItem('updateData');
+      if (!!storageLocationData) {
+        const preferredLocation: any = JSON.parse(storageLocationData);
+        this.locationDistance = preferredLocation.locationDistance;
+        if (preferredLocation.collegeLat && preferredLocation.collegeLong) {
+          const coords = localStorage.getItem('locations');
+      if (!!coords) {
+            const locations: GeolocationCoordinates = JSON.parse(coords);
+            this.getDistanceFromLatLonInKm(locations.latitude, locations.longitude,
+              preferredLocation.collegeLat, preferredLocation.collegeLong);
           } else {
-            if (Capacitor.isNativePlatform()) {
-              Geolocation.requestPermissions({ permissions: ['location'] }).then(reqPermission => {
-                if (reqPermission.location === 'denied') {
-                  this.app.showAlert('Please allow location to continue').then();
-                }
-              });
-            } else {
-              navigator.geolocation.getCurrentPosition(data => {
-                this.getDistanceFromLatLonInKm(data.coords.latitude, data.coords.longitude, res[0].collegeLat, res[0].collegeLong);
-              });
-            }
+            this.app.showAlert('Please allow location, restart app and clear from background to log attendance').then();
+            this.buttonClicked = false;
+            this.app.changeLoader(false);
           }
-        });
-
-
+        } else {
+          this.app.showAlert('Something went wrong, try again after sometimes').then();
+          this.buttonClicked = false;
+          this.app.changeLoader(false);
+        }
+      } else {
+        this.app.showAlert('Please enable location, restart app and clear from background to log attendance').then();
+        this.app.changeLoader(false);
       }
-    });
+    }
   }
 
   // locations distance measuring
@@ -154,7 +167,10 @@ export class Tab1Page implements OnInit {
 
     console.log('Distance between 2 points', distance);
     if (distance > this.locationDistance && this.auth.getUser().role === UserRole.user) {
-      this.app.showAlert('Please allow location and restart the app to log attendance.').then();
+      this.app.showAlert('You are outside of your college campus, You can\'t log attendance.').then();
+      this.buttonClicked = false;
+      this.app.changeLoader(false);
+
     } else {
       this.logTodayAttendance();
     }

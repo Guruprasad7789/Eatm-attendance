@@ -5,7 +5,11 @@
   width: 25px;
   padding: 3px;
 }
-
+.info-card{
+  background: rgb(255, 229, 229);
+  color: darkolivegreen;
+  border-radius: 10px;
+}
 .date-container {
   gap: 10px;
   display: flex;

@@ -15,6 +15,10 @@ export class AdminTab2Page {
   selectedClass = 0;
   selectedYear = 0;
   selectedDate = '';
+  fullAttend = 0;
+  eveningAttend = 0;
+  morningAttend = 0;
+  regdNo = '';
 
   constructor(
     private readonly attendance: AttendanceService,
@@ -37,9 +41,13 @@ export class AdminTab2Page {
       if (this.selectedClass > 0 || all) {
         if (this.selectedYear > 0 || all) {
           this.attendance.getStudentAttendancesPerDate(this.selectedDate,
-            all ? '' : this.selectedClass.toString(),all ? '' : this.selectedYear.toString()).subscribe((res: any) => {
+            all ? '' : this.selectedClass.toString(),all ? '' : this.selectedYear.toString()).subscribe((res: AttendanceModel[]) => {
             if (res) {
-              this.attendances = res;
+              this.attendances = this.regdNo.length > 0 && this.regdNo.trim().length > 0 ?
+               res.filter(e => e.studentId === this.regdNo) : res;
+              this.fullAttend = this.attendances .filter(e => e.morning.length > 0 && e.evening.length > 0).length;
+              this.morningAttend = this.attendances .filter(e => e.morning.length > 0 && e.evening.length === 0).length;
+              this.eveningAttend = this.attendances .filter(e => e.morning.length === 0 && e.evening.length > 0).length;
             }
           });
         } else {
