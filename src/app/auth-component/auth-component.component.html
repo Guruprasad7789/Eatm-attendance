@@ -1,9 +1,9 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" >
 
   <!-- Login Page -->
-  <div  *ngIf="screen === 'signin'">
+  <div  *ngIf="screen === 'signin'" class="auth-whole-container auth-whole-container-login">
     <div class="w-100 d-flex justify-content-between">
-      <img src="assets/login.gif" class="person-img" alt="Person logging in">
+      <img src="assets/eatm-college.jpg" class="person-img" alt="Person logging in">
       <img src="assets/eatm.png" class="eatm-logo" alt="EATM logo">
     </div>
     <h1 class="heading">👋 Welcome To EATM Attendance System<br><br></h1>
@@ -28,9 +28,9 @@
   </div>
 
   <!-- Sign up page -->
-  <div  *ngIf="screen === 'signup'">
+  <div  *ngIf="screen === 'signup'" class="auth-whole-container">
     <div class="w-100 d-flex justify-content-between">
-      <img src="assets/login.gif" class="person-img" alt="Person logging in">
+      <img src="assets/eatm-college.jpg" class="person-img" alt="Person logging in">
       <img src="assets/eatm.png" class="eatm-logo" alt="EATM logo">
     </div>
       <h1 class="heading">🚀 Create Account<br><br></h1>
@@ -88,7 +88,7 @@
   </div>
 
   <!-- Forget password page -->
-  <div  *ngIf="screen === 'forget'">
+  <div  *ngIf="screen === 'forget'" class="auth-whole-container auth-whole-container-login">
     <h1 class="heading">Forget Password?<br><br></h1>
     <p class="para">Enter email to reset</p>
     <ion-item lines="none" class="ion-item">
@@ -101,10 +101,4 @@
     <ion-button class="login-button" expand="block">Reset Password</ion-button>
   </div>
 
-
 </ion-content>
-<ion-footer color="white">
-  <ion-toolbar>
-    <p class="copyright">Copyright <a>EATM</a></p>
-  </ion-toolbar>
-</ion-footer>

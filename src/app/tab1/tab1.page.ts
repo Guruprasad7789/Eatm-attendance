@@ -8,6 +8,7 @@ import { AppService } from '../services/app.service';
 import { Geolocation } from '@capacitor/geolocation';
 import { Capacitor } from '@capacitor/core';
 import { UserRole } from '../models/user.model';
+import { Router } from '@angular/router';
 
 interface HourDetail {
   endTime: number;
@@ -33,7 +34,8 @@ export class Tab1Page implements OnInit {
     private readonly attendance: AttendanceService,
     private readonly user: UserService,
     private readonly auth: UserService,
-    private readonly app: AppService
+    private readonly app: AppService,
+    private readonly router: Router
   ) {
 
   }
@@ -43,6 +45,9 @@ export class Tab1Page implements OnInit {
   }
 
   ionViewDidEnter(): void {
+    if(this.user.getCurrentUserRole() === UserRole.admin){
+      this.router.navigate(['home/tabs/admin/tab1']).then();
+    }
     this.attendance.getTodayAttendance().subscribe((res: any) => {
       if (res && res.length > 0) {
         const data = res.map((item: any) => ({

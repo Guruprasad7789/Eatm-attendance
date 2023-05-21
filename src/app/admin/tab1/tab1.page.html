@@ -37,6 +37,7 @@
   <div class="d-flex justify-content-evenly my-2">
     <ion-button (click)="findAttendance()">Search</ion-button>
     <ion-button (click)="findAttendance(true)">Search All</ion-button>
+    <ion-button (click)="downloadInExcel(true)"><ion-icon name="download-outline"></ion-icon></ion-button>
   </div>
   <ng-container *ngIf="attendances.length > 0; else noRecordFound">
     <ion-card class="p-2 info-card">

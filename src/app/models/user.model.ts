@@ -8,6 +8,8 @@ export interface UserModel {
   studentId: string;
   password: string;
   role: UserRole;
+  // roomNo: number;
+  // deviceId: string;
 }
 export interface FirebaseUser {
   apiKey: string;
@@ -22,4 +24,11 @@ export interface FirebaseUser {
 
 export enum UserRole {
   user = 1, admin
+}
+
+export enum ClassRole {
+  'B Tech' = 1,
+  'M Tech',
+  'Diploma',
+  '+2'
 }

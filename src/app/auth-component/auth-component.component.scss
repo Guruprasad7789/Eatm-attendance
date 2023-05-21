@@ -1,15 +1,30 @@
+
 .eatm-logo{
   height: 100px;
   width: 100px;
-  margin: 15px 15px 0 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 78px;
 }
 .person-img {
-  height: 250px;
-  max-width: 70%;
-  border-radius: 50%;
-  margin: 15px 15px 20px;
+  margin: 20px auto 82px;
+  width: calc(100% - 32px);
+  border-radius: 10px;
 }
-
+.auth-whole-container-login{
+  height: 100%;
+}
+.auth-whole-container{
+  background-image: url('../../assets/eatmcol.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+ion-item {
+  --ion-item-background: transparent;
+}
 .heading{
     font-size: 30px;
     font-weight: bold;
