@@ -8,8 +8,8 @@ export interface UserModel {
   studentId: string;
   password: string;
   role: UserRole;
-  // roomNo: number;
-  // deviceId: string;
+  roomNo: number;
+  deviceId: string;
 }
 export interface FirebaseUser {
   apiKey: string;

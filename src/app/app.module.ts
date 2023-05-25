@@ -19,9 +19,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AuthGuardService } from './guards/auth.guard';
 import { AttendanceService } from './services/attendance.service';
 import { AppService } from './services/app.service';
-import { AppInterceptor } from './interceptors/app.interceptor';
 import { AuthLoggedGuardService } from './guards/auth-logged.guard';
-import { Geolocation } from '@capacitor/geolocation';
+import { File } from '@ionic-native/file/ngx';
 
 @NgModule({
   declarations: [AppComponent,AuthComponentComponent],
@@ -38,12 +37,10 @@ import { Geolocation } from '@capacitor/geolocation';
     AngularFireDatabaseModule,
     FormsModule,
     ReactiveFormsModule,
-
-
   ],
 
   providers: [CommonModule,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AuthGuardService, AuthLoggedGuardService, AttendanceService, AppService],
+    AuthGuardService, AuthLoggedGuardService, AttendanceService, AppService, File],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

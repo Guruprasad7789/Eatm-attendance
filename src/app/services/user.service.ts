@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AppService } from './app.service';
 import { map, catchError } from 'rxjs/operators';
+import { Device } from '@capacitor/device';
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -37,14 +40,7 @@ export class UserService {
         this.app.changeLoader(false);
         console.log(result);
         localStorage.setItem('auth', JSON.stringify(result));
-        this.getUserInitially(result.user.uid).subscribe((res: any) => {
-          if (res) {
-            localStorage.setItem('UserInfo', JSON.stringify(res));
-            this.afAuth.authState.subscribe((_user) => {
-              this.router.navigate(['home/tabs/'+ (res.role === UserRole.admin ? 'admin/' : '') +'tab1']).then();
-            });
-          }
-        });
+        return this.getUserInitially(result.user.uid);
       })
       .catch((error) => {
         this.app.changeLoader(false);
@@ -53,6 +49,7 @@ export class UserService {
   }
   // Sign up with email/password
   async signUp(user: UserModel) {
+    // alert(JSON.stringify(user));
     this.app.changeLoader(true);
     return this.afAuth
       .createUserWithEmailAndPassword(user.email, user.password)
@@ -65,6 +62,12 @@ export class UserService {
       });
   }
 
+  getDeviceId = async () => {
+    const info = await Device.getId();
+
+    console.log(info);
+    return info;
+  };
 
 
 
@@ -105,6 +108,8 @@ export class UserService {
       year: userToBeSaved.year,
       studentId: userToBeSaved.studentId,
       role: userToBeSaved.role,
+      roomNo: userToBeSaved.roomNo,
+      deviceId: userToBeSaved.deviceId,
     };
     this.app.changeLoader(false);
     return userRef.set(userData, {

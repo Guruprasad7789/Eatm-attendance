@@ -6,7 +6,7 @@
       <img src="assets/eatm-college.jpg" class="person-img" alt="Person logging in">
       <img src="assets/eatm.png" class="eatm-logo" alt="EATM logo">
     </div>
-    <h1 class="heading">👋 Welcome To EATM Attendance System<br><br></h1>
+    <h1 class="heading">👋 Welcome To EATM Hostel Attendance System<br><br></h1>
     <p class="para">Sign in to continue!</p>
     <form [formGroup]="formData">
       <ion-item lines="none" class="ion-item">
@@ -34,7 +34,7 @@
       <img src="assets/eatm.png" class="eatm-logo" alt="EATM logo">
     </div>
       <h1 class="heading">🚀 Create Account<br><br></h1>
-    <p class="para">Sign up to get started!</p>
+    <p class="para text-danger">You can only use one device to create account and login. You will not be allowed to login in other device.</p>
     <form [formGroup]="formData" class="pb-more">
       <ion-item lines="none" class="ion-item">
         <fieldset class="input-item">
@@ -65,6 +65,10 @@
           <ion-select-option value="3">3rd Year</ion-select-option>
           <ion-select-option value="4">4th Year</ion-select-option>
         </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Room no.</ion-label>
+        <ion-input type="number" placeholder="000" formControlName="roomNo"></ion-input>
       </ion-item>
       <ion-item lines="full">
         <ion-label position="floating">DOB</ion-label>

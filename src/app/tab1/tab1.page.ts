@@ -97,6 +97,7 @@ export class Tab1Page implements OnInit {
           class: user.class,
           name: user.name,
           email: user.email,
+          roomNo: user.roomNo.toString()
         }).then(res => {
           console.log(res);
           this.app.changeLoader(false);
@@ -116,6 +117,7 @@ export class Tab1Page implements OnInit {
           class: user.class,
           name: user.name,
           email: user.email,
+          roomNo: user.roomNo.toString()
         }).then(() => {
           this.app.changeLoader(false);
         }).catch(err => {

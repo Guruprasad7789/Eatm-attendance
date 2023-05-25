@@ -10,4 +10,5 @@ export interface AttendanceModel {
   year: string;
   name: string;
   email: string;
+  roomNo: string;
 }
